@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<extension key="com.joineryhq.fbpixel" type="module">
+  <file>fbpixel</file>
+  <name>FIXME</name>
+  <description>FIXME</description>
+  <license>GPL-3.0</license>
+  <maintainer>
+    <author>Allen Shaw</author>
+    <email>allen@JoineryHQ.com</email>
+  </maintainer>
+  <releaseDate>2016-09-01</releaseDate>
+  <version>1.0</version>
+  <develStage>alpha</develStage>
+  <compatibility>
+    <ver>4.2</ver>
+  </compatibility>
+  <comments>This is a new, undeveloped module</comments>
+  <civix>
+    <namespace>CRM/Fbpixel</namespace>
+  </civix>
+</extension>

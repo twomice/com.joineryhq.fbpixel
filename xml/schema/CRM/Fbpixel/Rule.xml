@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+
+<table>
+  <base>CRM/Fbpixel</base>
+  <class>Rule</class>
+  <name>civicrm_fbpixel_rule</name>
+  <comment>Rules for including Facebook pixels</comment>
+  <add>4.6</add>
+  <log>true</log>
+
+  <field>
+    <name>id</name>
+    <type>int unsigned</type>
+    <required>true</required>
+    <comment>Unique Rule ID</comment>
+    <add>4.6</add>
+  </field>
+  <primaryKey>
+    <name>id</name>
+    <autoincrement>true</autoincrement>
+  </primaryKey>
+
+  <field>
+    <name>entity</name>
+    <type>varchar</type>
+    <length>255</length>
+    <comment>Entity on which to display pixel</comment>
+    <add>4.6</add>
+  </field>
+
+  <field>
+    <name>page</name>
+    <type>varchar</type>
+    <length>255</length>
+    <comment>Page on which to display pixel</comment>
+    <add>4.6</add>
+  </field>
+
+  <field>
+    <name>event</name>
+    <type>varchar</type>
+    <length>255</length>
+    <comment>The Facebook pixel event to implement</comment>
+    <add>4.6</add>
+  </field>
+
+  <field>
+    <name>params</name>
+    <type>text</type>
+    <comment>Query parameters to send along with the pixel</comment>
+    <add>4.6</add>
+  </field>
+
+
+  <field>
+    <name>is_active</name>
+    <title>Is Active</title>
+    <type>boolean</type>
+    <default>0</default>
+    <comment>Is this rule active?</comment>
+    <add>4.6</add>
+    <html>
+      <type>CheckBox</type>
+    </html>
+  </field>
+
+</table>
