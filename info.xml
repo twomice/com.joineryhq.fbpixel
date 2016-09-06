@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
 <extension key="com.joineryhq.fbpixel" type="module">
   <file>fbpixel</file>
-  <name>FIXME</name>
-  <description>FIXME</description>
+  <name>Facebook Pixel Tracking</name>
+  <description>Inserts Facebook Pixel code on relevant CiviCRM pages and forms.</description>
   <license>GPL-3.0</license>
   <maintainer>
     <author>Allen Shaw</author>
     <email>allen@JoineryHQ.com</email>
   </maintainer>
   <releaseDate>2016-09-01</releaseDate>
-  <version>1.0</version>
+  <version>0.1</version>
   <develStage>alpha</develStage>
   <compatibility>
-    <ver>4.2</ver>
+    <ver>4.7</ver>
   </compatibility>
-  <comments>This is a new, undeveloped module</comments>
+  <comments>Initial dvelopment sponsored by Rigpa, Australia.</comments>
   <civix>
     <namespace>CRM/Fbpixel</namespace>
   </civix>
