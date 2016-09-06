@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<menu>
-  <item>
-    <path>civicrm/admin/fbpixel/rules</path>
-    <page_callback>CRM_Fbpixel_Page_Rules</page_callback>
-    <title>Fbpixel Rules</title>
-    <access_arguments>administer CiviCRM</access_arguments>
-  </item>
-</menu>
