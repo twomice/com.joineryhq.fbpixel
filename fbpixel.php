@@ -6,17 +6,27 @@ require_once 'fbpixel.civix.php';
  * Implementation of hook_civicrm_alterContent
  */
 function fbpixel_civicrm_alterContent(&$content, $context, $tplName, &$object) {
+  dsm($context, 'context');
+  dsm($object, get_class($object));
   $pixel_id = CRM_Core_BAO_Setting::getItem('com.joineryhq.fbpixel', 'pixel_id');
-  $event_id = CRM_Core_BAO_Setting::getItem('com.joineryhq.fbpixel', 'event_id');
   
   $extra_js = $extra_noscript = '';
 
-  if (get_class($object) == 'CRM_Event_Form_Registration_ThankYou' && $object->_eventId == $event_id) {
-    $fb_params = array(
-      'value' => $object->_totalAmount,
-    );
-    $extra_js .= "fbq('track', 'CompleteRegistration', ". json_encode($fb_params). ");";
-    $extra_noscript .= "fbq('track', 'CompleteRegistration', ". json_encode($fb_params). ");";
+  switch($class) {
+    case 'CRM_Event_Form_Registration_ThankYou':
+      $fb_params = array(
+        'value' => $object->_totalAmount,
+      );
+      $extra_js .= "fbq('track', 'CompleteRegistration', ". json_encode($fb_params). ");";
+      $extra_noscript .= "fbq('track', 'CompleteRegistration', ". json_encode($fb_params). ");";
+      break;
+    case 'CRM_Contribute_Form_Contribution_ThankYou':
+      $fb_params = array(
+        'value' => $object->_amount,
+      );
+      $extra_js .= "fbq('track', 'Purchase', ". json_encode($fb_params). ");";
+      $extra_noscript .= "fbq('track', 'CompleteRegistration', ". json_encode($fb_params). ");";
+      break;
   }
 
   $fb_pixel_code = <<<EOT
