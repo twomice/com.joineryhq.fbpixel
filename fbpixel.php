@@ -6,26 +6,92 @@ require_once 'fbpixel.civix.php';
  * Implementation of hook_civicrm_alterContent
  */
 function fbpixel_civicrm_alterContent(&$content, $context, $tplName, &$object) {
-  dsm($context, 'context');
-  dsm($object, get_class($object));
   $pixel_id = CRM_Core_BAO_Setting::getItem('com.joineryhq.fbpixel', 'pixel_id');
   
   $extra_js = $extra_noscript = '';
 
-  switch($class) {
+  switch(get_class($object)) {
+    case 'CRM_Event_Page_EventInfo':
+      // view content
+      $fb_params = array(
+        'content_name' => "event-" . $object->_id,
+        'content_type' => 'event',
+        'content_ids' => $object->_id,
+      );
+      _fbpixel_append_event('ViewContent', $fb_params, $extra_js, $extra_noscript);
+      break;
+    case 'CRM_Event_Form_Registration_Register':
+      // add to cart
+      $fb_params = array(
+        'value' => $object->_totalAmount,
+        'currency' => $object->_values['event']['currency'],
+        'content_name' => "event-" . $object->_eventId,
+        'content_type' => 'event',
+        'content_ids' => $object->_eventId,
+        'num_items' => 1,
+      );
+      _fbpixel_append_event('AddToCart', $fb_params, $extra_js, $extra_noscript);
+      break;
+    case 'CRM_Event_Form_Registration_Confirm':
+      $fb_params = array(
+        'value' => $object->_totalAmount,
+        'currency' => $object->_values['event']['currency'],
+        'content_name' => "event-" . $object->_eventId,
+        'content_category' => 'event',
+        'content_ids' => $object->_eventId,
+        'num_items' => 1,
+      );
+      _fbpixel_append_event('InitiateCheckout', $fb_params, $extra_js, $extra_noscript);
+      break;
     case 'CRM_Event_Form_Registration_ThankYou':
       $fb_params = array(
         'value' => $object->_totalAmount,
+        'currency' => $object->_values['event']['currency'],
+        'content_name' => "event-" . $object->_eventId,
       );
-      $extra_js .= "fbq('track', 'CompleteRegistration', ". json_encode($fb_params). ");";
-      $extra_noscript .= "fbq('track', 'CompleteRegistration', ". json_encode($fb_params). ");";
+      _fbpixel_append_event('CompleteRegistration', $fb_params, $extra_js, $extra_noscript);
+
+      $fb_params = array(
+        'value' => $object->_totalAmount,
+        'currency' => $object->_values['event']['currency'],
+        'content_name' => "event-" . $object->_eventId,
+        'content_type' => 'event',
+        'content_ids' => $object->_eventId,
+        'num_items' => 1,
+      );
+      _fbpixel_append_event('Purchase', $fb_params, $extra_js, $extra_noscript);
+      break;
+
+    case 'CRM_Contribute_Form_Contribution_Main':
+      // view content
+      $fb_params = array(
+        'content_name' => "contribution-" . $object->_id,
+        'content_type' => 'contribution',
+        'content_ids' => $object->_id,
+      );
+      _fbpixel_append_event('ViewContent', $fb_params, $extra_js, $extra_noscript);
+      break;
+    case 'CRM_Contribute_Form_Contribution_Confirm':
+      $fb_params = array(
+        'value' => $object->_amount,
+        'currency' => $object->_values['currency'],
+        'content_name' => "contribution-" . $object->_id,
+        'content_category' => 'contribution',
+        'content_ids' => $object->_id,
+        'num_items' => 1,
+      );
+      _fbpixel_append_event('InitiateCheckout', $fb_params, $extra_js, $extra_noscript);
       break;
     case 'CRM_Contribute_Form_Contribution_ThankYou':
       $fb_params = array(
         'value' => $object->_amount,
+        'currency' => $object->_values['currency'],
+        'content_name' => "contribution-" . $object->_id,
+        'content_type' => 'contribution',
+        'content_ids' => $object->_id,
+        'num_items' => 1,
       );
-      $extra_js .= "fbq('track', 'Purchase', ". json_encode($fb_params). ");";
-      $extra_noscript .= "fbq('track', 'CompleteRegistration', ". json_encode($fb_params). ");";
+      _fbpixel_append_event('Purchase', $fb_params, $extra_js, $extra_noscript);
       break;
   }
 
@@ -49,6 +115,7 @@ function fbpixel_civicrm_alterContent(&$content, $context, $tplName, &$object) {
     <!-- End Facebook Pixel Code -->
 EOT;
   $content = $fb_pixel_code . $content;
+  $content = '<pre>' . htmlentities($fb_pixel_code) . '</pre>' . $content;
 }
 
 /**
@@ -172,4 +239,29 @@ function fbpixel_civicrm_caseTypes(&$caseTypes) {
  */
 function fbpixel_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
   _fbpixel_civix_civicrm_alterSettingsFolders($metaDataFolders);
+}
+
+/**
+ * Append fbq() and noscript pixel code for the given event and parameters.
+ *
+ * @param string $event The relevant Facebook Pixel event.
+ * @param array $params An array of key/value pairs for Facebook Pixel parameters to be sent with the event.
+ * @param string $extra_js JavaScript code containing fbq() calls.
+ * @param string $extra_noscript HTML code containing facebook pixel <img> tags.
+ */
+function _fbpixel_append_event($event, $params, &$extra_js, &$extra_noscript) {
+  static $pixel_id;
+  if (!isset($pixel_id)) {
+    $pixel_id = CRM_Core_BAO_Setting::getItem('com.joineryhq.fbpixel', 'pixel_id');
+  }
+  
+  $extra_js .= "fbq('track', '$event', ". json_encode($params). ");\n";
+
+  $noscript_params = array(
+    'id' => $pixel_id,
+    'ev' => $event,
+    'noscript' => 1,
+    'cd' => $params,
+  );
+  $extra_noscript .= '<img src="https://www.facebook.com/tr?'. http_build_query($noscript_params). '" height="1" width="1" style="display:none"/>' . "\n";
 }
