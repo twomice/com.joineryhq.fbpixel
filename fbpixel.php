@@ -6,7 +6,8 @@ require_once 'fbpixel.civix.php';
  * Implementation of hook_civicrm_alterContent
  */
 function fbpixel_civicrm_alterContent(&$content, $context, $tplName, &$object) {
-  $pixel_id = CRM_Core_BAO_Setting::getItem('com.joineryhq.fbpixel', 'pixel_id');
+  
+  $pixel_id = CRM_Core_BAO_Setting::getItem('com.joineryhq.fbpixel', 'fbpixel_pixel_id');
   
   $extra_js = $extra_noscript = '';
 
@@ -252,7 +253,7 @@ function fbpixel_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
 function _fbpixel_append_event($event, $params, &$extra_js, &$extra_noscript) {
   static $pixel_id;
   if (!isset($pixel_id)) {
-    $pixel_id = CRM_Core_BAO_Setting::getItem('com.joineryhq.fbpixel', 'pixel_id');
+    $pixel_id = CRM_Core_BAO_Setting::getItem('com.joineryhq.fbpixel', 'fbpixel_pixel_id');
   }
   
   $extra_js .= "fbq('track', '$event', ". json_encode($params). ");\n";
@@ -264,4 +265,21 @@ function _fbpixel_append_event($event, $params, &$extra_js, &$extra_noscript) {
     'cd' => $params,
   );
   $extra_noscript .= '<img src="https://www.facebook.com/tr?'. http_build_query($noscript_params). '" height="1" width="1" style="display:none"/>' . "\n";
+}
+
+/**
+ * Implements hook_civicrm_navigationMenu().
+ *
+ * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_navigationMenu
+ */
+function fbpixel_civicrm_navigationMenu(&$menu) {
+  _fbpixel_civix_insert_navigation_menu($menu, 'Administer/System Settings', array(
+    'label' => ts('Facebook Pixel Tracking', array('domain' => 'com.joineryhq.fbpixel')),
+    'name' => 'Facebook Pixel Tracking',
+    'url' => 'civicrm/admin/fbpixel/settings',
+    'permission' => 'administer CiviCRM',
+    'operator' => 'AND',
+    'separator' => NULL,
+  ));
+  _fbpixel_civix_navigationMenu($menu);
 }
