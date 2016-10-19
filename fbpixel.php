@@ -6,9 +6,12 @@ require_once 'fbpixel.civix.php';
  * Implementation of hook_civicrm_alterContent
  */
 function fbpixel_civicrm_alterContent(&$content, $context, $tplName, &$object) {
-  
   $pixel_id = CRM_Core_BAO_Setting::getItem('com.joineryhq.fbpixel', 'fbpixel_pixel_id');
-  
+  if (empty($pixel_id)) {
+    // Nothing to do if pixel_id is not configured.
+    return;
+  }
+
   $extra_js = $extra_noscript = '';
 
   switch(get_class($object)) {
@@ -116,6 +119,8 @@ function fbpixel_civicrm_alterContent(&$content, $context, $tplName, &$object) {
     <!-- End Facebook Pixel Code -->
 EOT;
   $content = $fb_pixel_code . $content;
+  // Uncomment here to view pixel code at top of page. (This eases Selenium testing in Firefox.)
+  // $content = '<pre>' . htmlentities($fb_pixel_code) . '</pre>' . $content;
 }
 
 /**
