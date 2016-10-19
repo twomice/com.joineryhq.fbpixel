@@ -116,7 +116,6 @@ function fbpixel_civicrm_alterContent(&$content, $context, $tplName, &$object) {
     <!-- End Facebook Pixel Code -->
 EOT;
   $content = $fb_pixel_code . $content;
-  $content = '<pre>' . htmlentities($fb_pixel_code) . '</pre>' . $content;
 }
 
 /**
