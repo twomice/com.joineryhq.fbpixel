@@ -7,6 +7,8 @@ as shown below. I'm interested in making these more configurable, but have not
 been able to prioritize that work. Please see _Help and Improvements_ below if
 you'd like to sponsor such an improvement.
 
+Facebook Pixels in this extension use Facebook Marketing API version 2.8
+(https://developers.facebook.com/docs/marketing-api/facebook-pixel/v2.8)
 
 ## Facebook Pixel Events
 
