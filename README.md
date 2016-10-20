@@ -10,6 +10,11 @@ you'd like to sponsor such an improvement.
 Facebook Pixels in this extension use Facebook Marketing API version 2.8
 (https://developers.facebook.com/docs/marketing-api/facebook-pixel/v2.8)
 
+## Configuration
+After installing the extension, navigate to Administer > System Settings >
+Facebook Pixel Tracking. There you'll be able to enter your Facebook Pixel ID.
+Other than this, there are no configuration options to set.
+
 ## Facebook Pixel Events
 
 ### CiviCRM Events
