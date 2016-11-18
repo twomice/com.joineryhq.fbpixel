@@ -31,6 +31,7 @@ class CRM_Fbpixel_Form_Settings extends CRM_Core_Form {
   }
   function buildQuickForm() {
     $settings = $this->_settings;
+    $descriptions = array();
     foreach ($settings as $name => $setting) {
       if (isset($setting['quick_form_type'])) {
         switch($setting['html_type']) {
