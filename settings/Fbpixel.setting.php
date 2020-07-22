@@ -10,11 +10,10 @@ return array(
     'is_domain' => 1,
     'is_contact' => 0,
     'description' => ts(''),
-    'title' =>  ts('Facebook Pixel ID'),
+    'title' => ts('Facebook Pixel ID'),
     'help_text' => '',
     'html_type' => 'Text',
-    'html_attributes' => array(
-    ),
+    'html_attributes' => array(),
     'quick_form_type' => 'Element',
   ),
- );
+);

@@ -3,7 +3,7 @@
 require_once 'fbpixel.civix.php';
 
 /**
- * Implementation of hook_civicrm_alterContent
+ * Implements hook_civicrm_alterContent().
  */
 function fbpixel_civicrm_alterContent(&$content, $context, $tplName, &$object) {
   $pixel_id = CRM_Core_BAO_Setting::getItem('com.joineryhq.fbpixel', 'fbpixel_pixel_id');
@@ -14,7 +14,7 @@ function fbpixel_civicrm_alterContent(&$content, $context, $tplName, &$object) {
 
   $extra_js = $extra_noscript = '';
 
-  switch(get_class($object)) {
+  switch (get_class($object)) {
     case 'CRM_Event_Page_EventInfo':
       // view content
       $fb_params = array(
@@ -24,6 +24,7 @@ function fbpixel_civicrm_alterContent(&$content, $context, $tplName, &$object) {
       );
       _fbpixel_append_event('ViewContent', $fb_params, $extra_js, $extra_noscript);
       break;
+
     case 'CRM_Event_Form_Registration_Register':
       // add to cart
       $fb_params = array(
@@ -36,6 +37,7 @@ function fbpixel_civicrm_alterContent(&$content, $context, $tplName, &$object) {
       );
       _fbpixel_append_event('AddToCart', $fb_params, $extra_js, $extra_noscript);
       break;
+
     case 'CRM_Event_Form_Registration_Confirm':
       $fb_params = array(
         'value' => $object->_totalAmount,
@@ -47,6 +49,7 @@ function fbpixel_civicrm_alterContent(&$content, $context, $tplName, &$object) {
       );
       _fbpixel_append_event('InitiateCheckout', $fb_params, $extra_js, $extra_noscript);
       break;
+
     case 'CRM_Event_Form_Registration_ThankYou':
       $fb_params = array(
         'value' => $object->_totalAmount,
@@ -75,6 +78,7 @@ function fbpixel_civicrm_alterContent(&$content, $context, $tplName, &$object) {
       );
       _fbpixel_append_event('ViewContent', $fb_params, $extra_js, $extra_noscript);
       break;
+
     case 'CRM_Contribute_Form_Contribution_Confirm':
       $fb_params = array(
         'value' => $object->_amount,
@@ -86,6 +90,7 @@ function fbpixel_civicrm_alterContent(&$content, $context, $tplName, &$object) {
       );
       _fbpixel_append_event('InitiateCheckout', $fb_params, $extra_js, $extra_noscript);
       break;
+
     case 'CRM_Contribute_Form_Contribution_ThankYou':
       $fb_params = array(
         'value' => $object->_amount,
@@ -124,25 +129,25 @@ EOT;
 }
 
 /**
- * Implementation of hook_civicrm_pageRun
+ * Implements hook_civicrm_pageRun().
  */
 function fbpixel_civicrm_pageRun(&$page) {
-//  $resource = CRM_Core_Resources::singleton();
-//  $resource->addScriptFile('com.joineryhq.fbpixel', 'js/fbpixel.user.js');
-//  dsm($page, 'page');
+  //  $resource = CRM_Core_Resources::singleton();
+  //  $resource->addScriptFile('com.joineryhq.fbpixel', 'js/fbpixel.user.js');
+  //  dsm($page, 'page');
 }
 
 /**
- * Implementation of hook_civicrm_buildForm
+ * Implements hook_civicrm_buildForm().
  */
 function fbpixel_civicrm_buildForm($formName, &$form) {
-//  $resource = CRM_Core_Resources::singleton();
-//  $resource->addScriptFile('com.joineryhq.fbpixel', 'js/fbpixel.user.js');
-//  dsm($form, $formName);
+  //  $resource = CRM_Core_Resources::singleton();
+  //  $resource->addScriptFile('com.joineryhq.fbpixel', 'js/fbpixel.user.js');
+  //  dsm($form, $formName);
 }
 
 /**
- * Implementation of hook_civicrm_config
+ * Implements hook_civicrm_config().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_config
  */
@@ -151,9 +156,7 @@ function fbpixel_civicrm_config(&$config) {
 }
 
 /**
- * Implementation of hook_civicrm_xmlMenu
- *
- * @param $files array(string)
+ * Implements hook_civicrm_xmlMenu().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_xmlMenu
  */
@@ -162,7 +165,7 @@ function fbpixel_civicrm_xmlMenu(&$files) {
 }
 
 /**
- * Implementation of hook_civicrm_install
+ * Implements hook_civicrm_install().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_install
  */
@@ -171,7 +174,7 @@ function fbpixel_civicrm_install() {
 }
 
 /**
- * Implementation of hook_civicrm_uninstall
+ * Implements hook_civicrm_uninstall().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_uninstall
  */
@@ -180,7 +183,7 @@ function fbpixel_civicrm_uninstall() {
 }
 
 /**
- * Implementation of hook_civicrm_enable
+ * Implements hook_civicrm_enable().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_enable
  */
@@ -189,7 +192,7 @@ function fbpixel_civicrm_enable() {
 }
 
 /**
- * Implementation of hook_civicrm_disable
+ * Implements hook_civicrm_disable().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_disable
  */
@@ -198,13 +201,7 @@ function fbpixel_civicrm_disable() {
 }
 
 /**
- * Implementation of hook_civicrm_upgrade
- *
- * @param $op string, the type of operation being performed; 'check' or 'enqueue'
- * @param $queue CRM_Queue_Queue, (for 'enqueue') the modifiable list of pending up upgrade tasks
- *
- * @return mixed  based on op. for 'check', returns array(boolean) (TRUE if upgrades are pending)
- *                for 'enqueue', returns void
+ * Implements hook_civicrm_upgrade().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_upgrade
  */
@@ -213,7 +210,7 @@ function fbpixel_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL) {
 }
 
 /**
- * Implementation of hook_civicrm_managed
+ * Implements hook_civicrm_managed().
  *
  * Generate a list of entities to create/deactivate/delete when this module
  * is installed, disabled, uninstalled.
@@ -225,7 +222,7 @@ function fbpixel_civicrm_managed(&$entities) {
 }
 
 /**
- * Implementation of hook_civicrm_caseTypes
+ * Implements hook_civicrm_caseTypes().
  *
  * Generate a list of case-types
  *
@@ -238,7 +235,7 @@ function fbpixel_civicrm_caseTypes(&$caseTypes) {
 }
 
 /**
- * Implementation of hook_civicrm_alterSettingsFolders
+ * Implements hook_civicrm_alterSettingsFolders().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_alterSettingsFolders
  */
@@ -259,8 +256,8 @@ function _fbpixel_append_event($event, $params, &$extra_js, &$extra_noscript) {
   if (!isset($pixel_id)) {
     $pixel_id = CRM_Core_BAO_Setting::getItem('com.joineryhq.fbpixel', 'fbpixel_pixel_id');
   }
-  
-  $extra_js .= "fbq('track', '$event', ". json_encode($params). ");\n";
+
+  $extra_js .= "fbq('track', '$event', " . json_encode($params) . ");\n";
 
   $noscript_params = array(
     'id' => $pixel_id,
@@ -268,7 +265,7 @@ function _fbpixel_append_event($event, $params, &$extra_js, &$extra_noscript) {
     'noscript' => 1,
     'cd' => $params,
   );
-  $extra_noscript .= '<img src="https://www.facebook.com/tr?'. http_build_query($noscript_params). '" height="1" width="1" style="display:none"/>' . "\n";
+  $extra_noscript .= '<img src="https://www.facebook.com/tr?' . http_build_query($noscript_params) . '" height="1" width="1" style="display:none"/>' . "\n";
 }
 
 /**
