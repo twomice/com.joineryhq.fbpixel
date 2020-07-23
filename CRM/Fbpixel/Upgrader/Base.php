@@ -8,7 +8,7 @@
 class CRM_Fbpixel_Upgrader_Base {
 
   /**
-   * @var variesSubclassOfTTIS
+   * @var varies, subclass of ttis
    */
   public static $instance;
 
@@ -18,17 +18,17 @@ class CRM_Fbpixel_Upgrader_Base {
   protected $ctx;
 
   /**
-   * @var stringEGcomExampleMyExtension
+   * @var string, eg 'com.example.myextension'
    */
   protected $extensionName;
 
   /**
-   * @var stringFullPathToTheExtensionsSourceTree
+   * @var string, full path to the extension's source tree
    */
   protected $extensionDir;
 
   /**
-   * @var arrayRevisionNumberSortedNumerically
+   * @var array(revisionNumber) sorted numerically
    */
   private $revisions;
 
