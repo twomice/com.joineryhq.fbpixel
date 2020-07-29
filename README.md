@@ -80,15 +80,6 @@ Other than this, there are no configuration options to set.
       * currency: [contribution currency, e.g., USD, AUD]
       * num_items: 1 (this is always the integer 1)
 
-## Help and Improvements
-
-Please help me improve this extension by using the extension issue queue to
-report any troubles and to make requests for feature improvements. The issue
-queue is here: https://github.com/twomice/com.joineryhq.fbpixel/issues
-
-Issues submitted to the issue queue will be addressed as I have time and
-interest. Please contact me at allen@joineryhq.com to request paid support.
-
 ## Support
 ![screenshot](/images/joinery-logo.png)
 
