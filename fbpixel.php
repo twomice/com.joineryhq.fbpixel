@@ -275,7 +275,7 @@ function _fbpixel_append_event($event, $params, &$extra_js, &$extra_noscript) {
  */
 function fbpixel_civicrm_navigationMenu(&$menu) {
   _fbpixel_civix_insert_navigation_menu($menu, 'Administer/System Settings', array(
-    'label' => ts('Facebook Pixel Tracking', array('domain' => 'com.joineryhq.fbpixel')),
+    'label' => E::ts('Facebook Pixel Tracking', array('domain' => 'com.joineryhq.fbpixel')),
     'name' => 'Facebook Pixel Tracking',
     'url' => 'civicrm/admin/fbpixel/settings',
     'permission' => 'administer CiviCRM',
