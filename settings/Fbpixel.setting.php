@@ -1,5 +1,7 @@
 <?php
 
+use CRM_Fbpixel_ExtensionUtil as E;
+
 return array(
   'fbpixel_pixel_id' => array(
     'group_name' => 'Facebook Pixel',

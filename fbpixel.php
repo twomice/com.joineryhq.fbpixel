@@ -1,6 +1,7 @@
 <?php
 
 require_once 'fbpixel.civix.php';
+use CRM_Fbpixel_ExtensionUtil as E;
 
 /**
  * Implements hook_civicrm_alterContent().
