@@ -130,39 +130,12 @@ EOT;
 }
 
 /**
- * Implements hook_civicrm_pageRun().
- */
-function fbpixel_civicrm_pageRun(&$page) {
-  //  $resource = CRM_Core_Resources::singleton();
-  //  $resource->addScriptFile('com.joineryhq.fbpixel', 'js/fbpixel.user.js');
-  //  dsm($page, 'page');
-}
-
-/**
- * Implements hook_civicrm_buildForm().
- */
-function fbpixel_civicrm_buildForm($formName, &$form) {
-  //  $resource = CRM_Core_Resources::singleton();
-  //  $resource->addScriptFile('com.joineryhq.fbpixel', 'js/fbpixel.user.js');
-  //  dsm($form, $formName);
-}
-
-/**
  * Implements hook_civicrm_config().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_config
  */
 function fbpixel_civicrm_config(&$config) {
   _fbpixel_civix_civicrm_config($config);
-}
-
-/**
- * Implements hook_civicrm_xmlMenu().
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_xmlMenu
- */
-function fbpixel_civicrm_xmlMenu(&$files) {
-  _fbpixel_civix_civicrm_xmlMenu($files);
 }
 
 /**
@@ -175,82 +148,12 @@ function fbpixel_civicrm_install() {
 }
 
 /**
- * Implements hook_civicrm_postInstall().
- *
- * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_postInstall
- */
-function fbpixel_civicrm_postInstall() {
-  _fbpixel_civix_civicrm_postInstall();
-}
-
-/**
- * Implements hook_civicrm_uninstall().
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_uninstall
- */
-function fbpixel_civicrm_uninstall() {
-  return _fbpixel_civix_civicrm_uninstall();
-}
-
-/**
  * Implements hook_civicrm_enable().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_enable
  */
 function fbpixel_civicrm_enable() {
   return _fbpixel_civix_civicrm_enable();
-}
-
-/**
- * Implements hook_civicrm_disable().
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_disable
- */
-function fbpixel_civicrm_disable() {
-  return _fbpixel_civix_civicrm_disable();
-}
-
-/**
- * Implements hook_civicrm_upgrade().
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_upgrade
- */
-function fbpixel_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL) {
-  return _fbpixel_civix_civicrm_upgrade($op, $queue);
-}
-
-/**
- * Implements hook_civicrm_managed().
- *
- * Generate a list of entities to create/deactivate/delete when this module
- * is installed, disabled, uninstalled.
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_managed
- */
-function fbpixel_civicrm_managed(&$entities) {
-  return _fbpixel_civix_civicrm_managed($entities);
-}
-
-/**
- * Implements hook_civicrm_caseTypes().
- *
- * Generate a list of case-types
- *
- * Note: This hook only runs in CiviCRM 4.4+.
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_caseTypes
- */
-function fbpixel_civicrm_caseTypes(&$caseTypes) {
-  _fbpixel_civix_civicrm_caseTypes($caseTypes);
-}
-
-/**
- * Implements hook_civicrm_alterSettingsFolders().
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_alterSettingsFolders
- */
-function fbpixel_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
-  _fbpixel_civix_civicrm_alterSettingsFolders($metaDataFolders);
 }
 
 /**

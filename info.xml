@@ -18,10 +18,22 @@
   </urls>
   <develStage>alpha</develStage>
   <compatibility>
-    <ver>4.7</ver>
+    <ver>5.51</ver>
   </compatibility>
   <comments>Initial dvelopment sponsored by Rigpa, Australia.</comments>
   <civix>
     <namespace>CRM/Fbpixel</namespace>
+    <format>25.10.2</format>
   </civix>
+  <mixins>
+    <mixin>menu-xml@1.0.0</mixin>
+    <mixin>setting-php@1.0.0</mixin>
+    <mixin>smarty-v2@1.0.3</mixin>
+    <mixin>scan-classes@1.0.0</mixin>
+  </mixins>
+  <classloader>
+    <psr0 prefix="CRM_" path="."/>
+    <psr4 prefix="Civi\" path="Civi"/>
+  </classloader>
+  <upgrader>CiviMix\Schema\Fbpixel\AutomaticUpgrader</upgrader>
 </extension>
